@@ -1,16 +1,20 @@
 #include <iostream>
 
+const int HOURS_PER_DAY = 24;
+const int MINUTES_PER_HOUR = 60;
+const int SECOND_PER_MINUTE = 60;
+
 int main() {
 
-    int second;
+    long long second;
 
     std::cout << "Enter the number of seconds:";
     std::cin >> second;
     std::cout << second << " seconds = "
-              << second / (3600 * 24) << " days, "
-              << (second / 3600) % 24 << " hours, "
-              << (second / 60) % 60 << " minutes, "
-              << second % 60 << " seconds "
+              << second / HOURS_PER_DAY / MINUTES_PER_HOUR / SECOND_PER_MINUTE << " days, "
+              << (second / MINUTES_PER_HOUR / SECOND_PER_MINUTE) % HOURS_PER_DAY << " hours, "
+              << (second / SECOND_PER_MINUTE) % SECOND_PER_MINUTE << " minutes, "
+              << second % SECOND_PER_MINUTE << " seconds "
               << std::endl;
 
 }

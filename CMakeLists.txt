@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(works)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_GLIBCXX_DEBUG")
 
 add_executable(works main.cpp)
 
@@ -18,3 +19,5 @@ add_executable(exercise03_main exercise03/main.cpp)
 
 add_executable(exercise04_main exercise04/main.cpp)
 add_executable(exercise05_main exercise05/main.cpp)
+
+add_executable(assignment02_main assignment02/main.cpp)

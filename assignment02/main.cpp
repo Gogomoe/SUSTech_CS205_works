@@ -24,6 +24,8 @@ struct City {
     double longitude;
 };
 
+vector<const City *> toSelect{};
+
 double toRadians(double it);
 
 vector<City> readCSVFile(const string &filename);
@@ -31,6 +33,8 @@ vector<City> readCSVFile(const string &filename);
 bool readCity(const City **p, const vector<City> &cities);
 
 double calcDistance(const City &c1, const City &c2);
+
+bool is_number(const std::string &s);
 
 int main() {
     vector<City> cities = readCSVFile(DATA_CSV_FILE);
@@ -76,7 +80,6 @@ double calcDistance(const City &c1, const City &c2) {
 }
 
 bool readCity(const City **p, const vector<City> &cities) {
-    const City *res = nullptr;
     string s;
     getline(cin, s);
     std::transform(s.begin(), s.end(), s.begin(), ::toupper);
@@ -84,37 +87,47 @@ bool readCity(const City **p, const vector<City> &cities) {
     if (s == "BYE") {
         return false;
     }
+    if (is_number(s) && !cities.empty()) {
+        int num = std::stoi(s);
+        if (num < 0 || num >= toSelect.size()) {
+            cout << "please enter a correct number" << endl;
+            return true;
+        }
+        *p = toSelect[num];
+        toSelect.clear();
+        return true;
+    }
+
     if (s.size() < 3) {
         cout << "city name is too short" << endl;
         return true;
     }
 
-    bool multipleCity = false;
+    toSelect.clear();
     for (auto city = cities.begin(); city != cities.end(); city++) {
         if (city->name.rfind(s, 0) == 0) {
-            if (res == nullptr) {
-                res = &(*city);
-            } else if (!multipleCity) {
-                multipleCity = true;
-                cout << "there exist multiple cities" << endl;
-                cout << res->name << ", " << res->country << endl;
-                cout << city->name << ", " << city->country << endl;
-            } else {
-                cout << city->name << ", " << city->country << endl;
+            if (toSelect.size() == 1) {
+                cout << "there exist multiple cities, you can input number as city name" << endl;
+                cout << "0. " << toSelect[0]->name << ", " << toSelect[0]->country << endl;
+                cout << "1. " << city->name << ", " << city->country << endl;
+            } else if (toSelect.size() > 1) {
+                cout << toSelect.size() << ". " << city->name << ", " << city->country << endl;
             }
+            toSelect.push_back(&*city);
+
         }
     }
 
-    if (multipleCity) {
+    if (toSelect.size() >= 2) {
         return true;
     }
 
-    if (res == nullptr) {
+    if (toSelect.empty()) {
         cout << "not found any city" << endl;
         return true;
     }
 
-    *p = res;
+    *p = toSelect[0];
     return true;
 
 }
@@ -177,4 +190,11 @@ vector<City> readCSVFile(const string &filename) {
 
 double toRadians(double it) {
     return it / 180.0 * 3.1415926535;
+}
+
+bool is_number(const std::string &s) {
+    return !s.empty() && std::find_if(
+            s.begin(), s.end(),
+            [](unsigned char c) { return !std::isdigit(c); }
+    ) == s.end();
 }

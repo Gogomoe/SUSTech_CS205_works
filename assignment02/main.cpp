@@ -141,14 +141,14 @@ vector<City> readCSVFile(const string &filename) {
         return cities;
     }
 
-    int cnt = 0;
+    int lineCnt = 1;
     string line;
 
     while (std::getline(file, line)) {
 
-        if (cnt == MAX_ARRAY_SIZE) {
-            cout << "cannot load the file into array with size " << MAX_ARRAY_SIZE << endl;
-            return vector<City>{};
+        if (cities.size() == MAX_ARRAY_SIZE) {
+            cout << "the file is larger than " << MAX_ARRAY_SIZE << " lines, skip remaining lines" << endl;
+            break;
         }
 
         string delimiter = ",";
@@ -162,15 +162,15 @@ vector<City> readCSVFile(const string &filename) {
         }
         token[column] = line;
 
-        cities.push_back(City{});
-        City &city = cities[cnt];
 
         if (token[0].size() >= MAX_NAME_LENGTH || token[2].size() >= MAX_NAME_LENGTH) {
-            cout << "cannot load the name into char array with size " << MAX_NAME_LENGTH << endl;
-            return vector<City>{};
+            cout << lineCnt << ": cannot load the name into char array with size " << MAX_NAME_LENGTH
+                 << ", skip the line" << endl;
         }
 
         std::transform(token[0].begin(), token[0].end(), token[0].begin(), ::toupper);
+
+        City city = City{};
 
         if (token[1].size() < MAX_NAME_LENGTH) {
             city.province = token[1];
@@ -181,7 +181,9 @@ vector<City> readCSVFile(const string &filename) {
         city.latitude = std::stod(token[3]);
         city.longitude = std::stod(token[4]);
 
-        cnt++;
+        cities.push_back(city);
+
+        lineCnt++;
 
     }
 

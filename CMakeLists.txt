@@ -21,3 +21,7 @@ add_executable(exercise04_main exercise04/main.cpp)
 add_executable(exercise05_main exercise05/main.cpp)
 
 add_executable(assignment02_main assignment02/main.cpp)
+
+add_executable(exercise06_E1 exercise06/E1.cpp)
+add_executable(exercise06_E2 exercise06/E2.cpp)
+add_executable(exercise06_E3 exercise06/E3.cpp)

@@ -29,3 +29,7 @@ add_executable(exercise06_E3 exercise06/E3.cpp)
 add_executable(exercise07_E1 exercise07/E1.cpp)
 add_executable(exercise07_E2 exercise07/E2.cpp)
 add_executable(exercise07_E3 exercise07/E3.cpp)
+
+add_executable(assignment03_A1 assignment03/A1.cpp)
+add_executable(assignment03_A2 assignment03/A2.cpp)
+add_executable(assignment03_A3 assignment03/A3.cpp assignment03/utf8.c assignment03/utf8.h)

@@ -36,3 +36,7 @@ add_executable(assignment03_A3 assignment03/A3.cpp assignment03/utf8.c assignmen
 
 add_executable(exercise08_E1 exercise08/E1.cpp)
 add_executable(exercise08_E2 exercise08/E2.cpp)
+
+add_executable(assignment04_A1 assignment04/A1.cpp)
+add_executable(assignment04_A4 assignment04/A4.cpp)
+add_executable(assignment04_A5 assignment04/A5.cpp)

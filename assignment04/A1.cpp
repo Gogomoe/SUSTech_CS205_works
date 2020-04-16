@@ -24,11 +24,8 @@ int randomInt(int below, int upper);
 
 using namespace std;
 
-int main() {
-
+vector<Student> question1() {
     cout << "please input student count: ";
-
-    // Q1 generate and print students
 
     int n = readInt(1, INT32_MAX);
 
@@ -50,10 +47,10 @@ int main() {
         cout << endl;
     }
 
-    cout << endl;
+    return students;
+}
 
-    // Q2 output absent students
-
+void question2(const vector<Student> &students) {
     cout << "following students was absent equal to or greater than twice" << endl;
 
     for (auto &student : students) {
@@ -68,11 +65,9 @@ int main() {
             cout << student.sid << " is absent for " << absent_times << " times" << endl;
         }
     }
+}
 
-    cout << endl;
-
-    // Q3 save csv
-
+void question3(const vector<Student> &students) {
     ofstream fout(save_file);
     if (!fout.good()) {
         cout << "cannot save the file: " << save_file << endl;
@@ -91,6 +86,26 @@ int main() {
     fout.close();
 
     cout << "write file to " << save_file << " success" << endl;
+}
+
+int main() {
+
+    // Q1 generate and print students
+
+    vector<Student> students = question1();
+
+    cout << endl;
+
+    // Q2 output absent students
+
+    question2(students);
+
+    cout << endl;
+
+    // Q3 save csv
+
+    question3(students);
+
     cout << endl;
 
     return 0;
@@ -122,7 +137,7 @@ int randomInt(int below, int upper) {
 }
 
 int generateSID() {
-    int year = randomInt(2011, 2020);
+    int year = randomInt(2000, 2020);
     int num = randomInt(0, 9999);
 
     return year * 10000 + num;

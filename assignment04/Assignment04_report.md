@@ -37,11 +37,8 @@ int randomInt(int below, int upper);
 
 using namespace std;
 
-int main() {
-
+vector<Student> question1() {
     cout << "please input student count: ";
-
-    // Q1 generate and print students
 
     int n = readInt(1, INT32_MAX);
 
@@ -63,10 +60,10 @@ int main() {
         cout << endl;
     }
 
-    cout << endl;
+    return students;
+}
 
-    // Q2 output absent students
-
+void question2(const vector<Student> &students) {
     cout << "following students was absent equal to or greater than twice" << endl;
 
     for (auto &student : students) {
@@ -81,11 +78,9 @@ int main() {
             cout << student.sid << " is absent for " << absent_times << " times" << endl;
         }
     }
+}
 
-    cout << endl;
-
-    // Q3 save csv
-
+void question3(const vector<Student> &students) {
     ofstream fout(save_file);
     if (!fout.good()) {
         cout << "cannot save the file: " << save_file << endl;
@@ -104,6 +99,26 @@ int main() {
     fout.close();
 
     cout << "write file to " << save_file << " success" << endl;
+}
+
+int main() {
+
+    // Q1 generate and print students
+
+    vector<Student> students = question1();
+
+    cout << endl;
+
+    // Q2 output absent students
+
+    question2(students);
+
+    cout << endl;
+
+    // Q3 save csv
+
+    question3(students);
+
     cout << endl;
 
     return 0;
@@ -135,7 +150,7 @@ int randomInt(int below, int upper) {
 }
 
 int generateSID() {
-    int year = randomInt(2011, 2020);
+    int year = randomInt(2000, 2020);
     int num = randomInt(0, 9999);
 
     return year * 10000 + num;
@@ -155,6 +170,7 @@ int readInt(int below, int upper) {
         exit(0);
     }
 }
+
 
 ```
 
@@ -278,29 +294,21 @@ int index_of(string *start, string *end, const string &toSearch) {
 
 input and output: 
 ```plain
-please input student count: 10
-20179665: 2, 1, 4, 0, 1, 1, 5, 5, 3, 5, 2, 0, 2, 2
-20194252: 5, 3, 2, 5, 3, 3, 1, 3, 2, 3, 2, 3, 2, 4
-20115722: 4, 0, 4, 4, 2, 5, 2, 1, 2, 1, 2, 2, 2, 1
-20134688: 3, 0, 4, 1, 2, 3, 1, 5, 3, 0, 3, 0, 5, 5
-20122222: 5, 3, 5, 1, 4, 2, 4, 5, 0, 0, 5, 5, 2, 3
-20120055: 4, 2, 4, 4, 1, 1, 4, 4, 0, 1, 2, 2, 5, 0
-20132626: 0, 1, 5, 4, 5, 5, 3, 0, 1, 4, 2, 1, 3, 2
-20203621: 4, 3, 4, 0, 5, 4, 5, 5, 0, 0, 3, 0, 5, 5
-20187140: 2, 4, 1, 5, 3, 2, 1, 5, 5, 4, 1, 1, 0, 1
-20204831: 5, 0, 5, 4, 1, 0, 1, 0, 5, 5, 1, 5, 3, 0
+please input student count: 5
+20160909: 0, 2, 5, 1, 1, 1, 0, 3, 2, 2, 0, 1, 4, 0
+20142626: 3, 4, 3, 4, 0, 2, 4, 0, 3, 2, 5, 2, 2, 4
+20191284: 3, 3, 5, 3, 0, 4, 5, 2, 1, 2, 4, 0, 2, 0
+20006178: 0, 0, 4, 0, 0, 2, 1, 0, 2, 4, 1, 1, 4, 5
+20121096: 2, 0, 0, 2, 5, 2, 2, 5, 0, 1, 0, 4, 0, 2
 
 following students was absent equal to or greater than twice
-20179665 is absent for 2 times
-20134688 is absent for 3 times
-20122222 is absent for 2 times
-20120055 is absent for 2 times
-20132626 is absent for 2 times
-20203621 is absent for 4 times
-20204831 is absent for 4 times
+20160909 is absent for 4 times
+20142626 is absent for 2 times
+20191284 is absent for 3 times
+20006178 is absent for 5 times
+20121096 is absent for 5 times
 
 write file to lab_records.csv success
-
 
 ```
 

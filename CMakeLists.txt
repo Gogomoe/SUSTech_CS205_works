@@ -48,3 +48,5 @@ add_executable(midterm_Q4 midterm/11811712_question4.cpp)
 add_executable(assignment05 assignment05/UTF8string.cpp assignment05/testUTF8string.cpp assignment05/utf8.c)
 
 add_executable(exercise11_main exercise11/main.cpp)
+
+add_executable(exercise12_main exercise12/main.cpp exercise12/Complex.cpp exercise12/Number.cpp)

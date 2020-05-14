@@ -50,3 +50,5 @@ add_executable(assignment05 assignment05/UTF8string.cpp assignment05/testUTF8str
 add_executable(exercise11_main exercise11/main.cpp)
 
 add_executable(exercise12_main exercise12/main.cpp exercise12/Complex.cpp exercise12/Number.cpp)
+
+add_executable(exercise13_main exercise13/main.cpp)

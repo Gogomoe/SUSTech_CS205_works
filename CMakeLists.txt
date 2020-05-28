@@ -55,3 +55,5 @@ add_executable(exercise13_main exercise13/main.cpp)
 
 add_executable(exercise14_E1 exercise14/E1.cpp)
 add_executable(exercise14_E2 exercise14/E2.cpp)
+
+add_executable(exercise15_main exercise15/main.cpp)
